@@ -1,0 +1,3 @@
+# + Gated Residual (4 streams): the full Saul-Dense block (52.4M). Reference for a07-a13.
+_base_: base/proxy.yaml
+model_config: configs/models/dense_55m.yaml

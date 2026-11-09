@@ -1,0 +1,37 @@
+seed: 781
+model_config: configs/models/dense_286m.yaml
+tokens: data/tokens/legal32k
+tokenizer: artifacts/tokenizers/legal32k
+data_config: configs/data.yaml
+run_dir: runs/dense_286m
+train:
+  seq_len: 2048
+  batch_size: 8
+  grad_accum: 32          # 8 * 2048 * 32 = 524288 tokens / step
+  total_steps: 9000
+  bf16: true
+  compile: true           # per-block torch.compile
+  grad_clip: 1.0
+  log_every: 20
+  ckpt_every: 500
+  eval_every: 500
+  eval_sequences: 256     # 256 x 2048 = 0.5M held-out tokens (val loss + bits/byte)
+  ema_decay: 0.999
+  mntp: true              # dense only; every 8th micro-batch, applied in the trainer
+  mntp_every: 8
+  num_workers: 4          # workers read disjoint shards and resume independently
+  mixture: stable
+  long_doc_prob: 0.0
+optim:
+  # Muon updates are scaled to RMS 0.2 (Moonlight), so Muon takes an AdamW-scale LR.
+  muon_lr: 0.002
+  adamw_lr: 0.002
+  embed_lr: 0.003
+  weight_decay: 0.1
+  ns_steps: 5
+  warmup_frac: 0.02
+  decay_frac: 0.20
+  engram_lr_mult: 5.0
+wandb:
+  enabled: false
+  project: saul-phase1

@@ -1,0 +1,26 @@
+# Shared settings for the ~55M proxy ablations (report_saul.md schedule, Sep 29-30).
+# 7,600 steps x 131,072 tokens = 0.996B tokens per run, WSD (2% warmup, 20% decay), stable mixture.
+_base_: ../../train/base.yaml
+model_config: configs/models/dense_55m.yaml
+enforce_min_params: false
+train:
+  seq_len: 2048
+  batch_size: 32
+  grad_accum: 2           # 32 * 2048 * 2 = 131072 tokens / step
+  total_steps: 7600
+  compile: true
+  log_every: 50
+  ckpt_every: 0
+  eval_every: 1000
+  eval_sequences: 256     # 0.5M held-out tokens; bits/byte is comparable across tokenizers
+  mntp: false
+  num_workers: 4
+  mixture: stable
+optim:
+  muon_lr: 0.002
+  adamw_lr: 0.002
+  embed_lr: 0.003
+wandb:
+  enabled: true
+  project: saul-ablations
+  group: proxy-1B

@@ -1,0 +1,20 @@
+# Saul-CED for the full pretrain. The report's causal encoder-decoder: 11 encoder layers
+# (first two sliding-window, the rest full causal) and 11 decoder layers with a 512-token window.
+# Engram is off: the proxy run diverged. mHC is off: 4-stream residuals cut throughput for little
+# gain, and the report says to drop mHC before dropping the CED core. Attention stays gated.
+model:
+  arch: ced
+  vocab_size: 32768
+  d_model: 1024
+  n_layers: 22
+  n_encoder_layers: 11
+  n_heads: 16
+  n_kv_heads: 4
+  head_dim: 64
+  rope_dims: 32
+  ffn_dim: 2048
+  residual: prenorm
+  swa_window: 512
+  use_engram: false
+  attn_gate: true
+  max_position: 16384

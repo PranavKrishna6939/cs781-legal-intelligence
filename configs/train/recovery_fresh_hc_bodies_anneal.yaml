@@ -1,0 +1,8 @@
+_base_: recovery_b_anneal.yaml
+tokens: /data/cs781-archive/recovery_20261006/tokens_fresh_hc
+data_config: configs/data_fresh_hc_bodies_20261006.yaml
+run_dir: /data/cs781-archive/recovery_20261006/hybrid_b_fresh_hc_anneal
+train:
+  # Preserve step-20,000 optimizer/EMA state for a possible early-decay comparison.
+  ckpt_every: 1000
+  keep_trainer_states: 2

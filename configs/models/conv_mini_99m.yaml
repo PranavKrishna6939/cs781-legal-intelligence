@@ -1,0 +1,12 @@
+model:
+  arch: conv
+  vocab_size: 32768
+  d_model: 640
+  n_layers: 16
+  n_heads: 10
+  n_kv_heads: 2
+  head_dim: 64
+  rope_dims: 32
+  ffn_dim: 1728
+  residual: prenorm
+  max_position: 8192

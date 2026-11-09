@@ -1,0 +1,6 @@
+# a03 + masked next-token prediction on 1 in 4 micro-batches (25%).
+_base_: base/proxy.yaml
+model_config: configs/models/dense_55m.yaml
+train:
+  mntp: true
+  mntp_every: 4

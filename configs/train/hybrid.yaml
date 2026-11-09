@@ -1,0 +1,10 @@
+# Saul-Hybrid (294M): same token budget and schedule as Saul-Dense (9,000 x 524K tokens = 4.72B).
+# MNTP stays off: Gated DeltaNet layers are causal by construction, so a bidirectional pass has no meaning.
+_base_: base.yaml
+model_config: configs/models/hybrid_294m.yaml
+run_dir: runs/hybrid_294m
+train:
+  mntp: false
+wandb:
+  enabled: true
+  project: saul-phase1

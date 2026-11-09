@@ -1,0 +1,18 @@
+_base_: data.yaml
+sources:
+- supreme_court
+- acts
+- tribunals
+- high_courts
+- high_courts_fresh
+- supreme_court_restored_spans
+mixture:
+  anneal:
+    supreme_court: 0.6642762923969232
+    acts: 0.0695862633439528
+    tribunals: 0.07658553652718379
+    high_courts: 0.057783564759514364
+    high_courts_fresh: 0.10589643134482014
+    supreme_court_restored_spans: 0.02587191162760568
+  anneal_use_test_mix: false
+  anneal_min_share: 0.0

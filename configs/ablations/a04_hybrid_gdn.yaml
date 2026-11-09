@@ -1,0 +1,3 @@
+# Saul-Hybrid proxy: 3:1 Gated DeltaNet : gated attention, Gated Residual (53.6M).
+_base_: base/proxy.yaml
+model_config: configs/models/hybrid_55m.yaml

@@ -1,0 +1,14 @@
+# Ablation step 2: pre-norm block with the Saul attention recipe (sigmoid output gate, QK-norm, 50% partial RoPE).
+# ffn_dim widened so the parameter count matches dense_55m (~52.5M).
+model:
+  arch: dense
+  vocab_size: 32768
+  d_model: 512
+  n_layers: 10
+  n_heads: 8
+  n_kv_heads: 2
+  head_dim: 64
+  rope_dims: 32
+  ffn_dim: 1728
+  residual: prenorm
+  max_position: 4096

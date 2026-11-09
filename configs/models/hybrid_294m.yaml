@@ -1,0 +1,17 @@
+model:
+  arch: hybrid
+  vocab_size: 32768
+  d_model: 1024
+  n_layers: 20
+  n_heads: 16
+  n_kv_heads: 4
+  head_dim: 64
+  rope_dims: 32
+  ffn_dim: 2304
+  residual: gr
+  gr_branches: 4
+  gr_rank: 64
+  gdn_heads: 8
+  gdn_head_dim: 128
+  gdn_impl: fla
+  max_position: 16384

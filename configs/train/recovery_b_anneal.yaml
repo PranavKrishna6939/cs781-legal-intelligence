@@ -1,0 +1,12 @@
+_base_: hybrid.yaml
+run_dir: /data/cs781-archive/recovery_20261005/hybrid_b_anneal
+data_config: configs/data_anneal_testmix.yaml
+train:
+  total_steps: 21002
+  mixture: anneal
+  mntp: false
+  ckpt_every: 0
+  eval_every: 500
+optim:
+  # int(21002 * (1 - 1800/21002)) == 19202: decay starts on the resumed step.
+  decay_frac: 0.0857061232263594

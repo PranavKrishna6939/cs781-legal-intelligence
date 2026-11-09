@@ -1,0 +1,3 @@
+_base_: dense_286m.yaml
+model:
+  n_layers: 21

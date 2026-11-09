@@ -1,0 +1,17 @@
+# Ablation: causal encoder-decoder proxy (6 encoder + 6 decoder layers, 4-stream mHC, no Engram).
+model:
+  arch: ced
+  vocab_size: 32768
+  d_model: 512
+  n_layers: 12
+  n_encoder_layers: 6
+  n_heads: 8
+  n_kv_heads: 2
+  head_dim: 64
+  rope_dims: 32
+  ffn_dim: 1280
+  residual: mhc
+  gr_branches: 4
+  swa_window: 512
+  use_engram: false
+  max_position: 4096

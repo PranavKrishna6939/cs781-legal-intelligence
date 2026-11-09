@@ -1,0 +1,7 @@
+# H6 polish mix: 60% Supreme Court, 25% Acts, 15% Tribunals. High courts stay at 0.
+# anneal_min_share is 0 so the 8% floor does not pull high courts back in.
+_base_: data.yaml
+mixture:
+  anneal: {supreme_court: 0.60, acts: 0.25, tribunals: 0.15, high_courts: 0.0}
+  anneal_use_test_mix: false
+  anneal_min_share: 0.0

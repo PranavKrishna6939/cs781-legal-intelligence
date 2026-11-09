@@ -1,0 +1,16 @@
+model:
+  arch: hybrid
+  vocab_size: 32768
+  d_model: 512
+  n_layers: 10
+  n_heads: 8
+  n_kv_heads: 2
+  head_dim: 64
+  rope_dims: 32
+  ffn_dim: 1408
+  residual: gr
+  gr_rank: 32
+  gdn_heads: 4
+  gdn_head_dim: 128
+  gdn_impl: fla          # the torch recurrence is a Python loop over T; CPU tests only
+  max_position: 4096

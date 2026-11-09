@@ -1,0 +1,3 @@
+# Llama baseline: pre-norm, full RoPE, no QK-norm, no attention gate (52.8M).
+_base_: base/proxy.yaml
+model_config: configs/models/llama_55m.yaml

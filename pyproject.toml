@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "saul"
+version = "0.1.0"
+description = "CS-781 Capstone Phase-1: 300M legal foundation models (Saul-Dense / Saul-Hybrid / Saul-CED / Saul-Conv-Mini)"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.8",
+    "numpy>=1.26",
+    "pyyaml>=6.0",
+    "tokenizers>=0.20",
+    "transformers>=4.46",
+    "huggingface_hub>=0.25",
+    "ijson>=3.3",
+    "scikit-learn>=1.4",
+    "bert-score==0.3.13",
+    "rouge-score>=0.1.2",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+gpu = [
+    # Build flash-attn for sm_120:  TORCH_CUDA_ARCH_LIST="12.0" pip install flash-attn --no-build-isolation
+    "flash-attn>=2.7.4",
+    "flash-linear-attention>=0.3.0",
+    "torchao>=0.10",
+]
+track = ["wandb>=0.18"]
+dev = ["pytest>=8.0"]
+
+[tool.setuptools.packages.find]
+include = ["saul*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,7 @@
+# a03 LR sweep: every learning rate doubled.
+_base_: base/proxy.yaml
+model_config: configs/models/dense_55m.yaml
+optim:
+  muon_lr: 0.004
+  adamw_lr: 0.004
+  embed_lr: 0.006

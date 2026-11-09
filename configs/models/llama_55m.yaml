@@ -1,0 +1,16 @@
+# Ablation baseline: Llama-style block (pre-norm, full RoPE, no QK-norm, no attention gate).
+# ffn_dim widened so the parameter count matches dense_55m (~52.5M).
+model:
+  arch: dense
+  vocab_size: 32768
+  d_model: 512
+  n_layers: 10
+  n_heads: 8
+  n_kv_heads: 2
+  head_dim: 64
+  rope_dims: 64
+  ffn_dim: 1920
+  residual: prenorm
+  attn_gate: false
+  qk_norm: false
+  max_position: 4096

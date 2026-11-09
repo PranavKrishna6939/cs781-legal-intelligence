@@ -1,0 +1,4 @@
+# Controlled repeat of the winning B decay: change only the isolated SC token store.
+_base_: recovery_b_anneal.yaml
+tokens: /data/cs781-archive/recovery_20261006/tokens_repaired
+run_dir: /data/cs781-archive/recovery_20261006/hybrid_b_repaired_anneal

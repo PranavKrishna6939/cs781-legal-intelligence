@@ -1,0 +1,6 @@
+# a06 with the Engram tables at the base AdamW LR (engram_lr_mult 1 instead of 5). a06 diverged at ~1K steps with
+# unnormalised lookups and again at ~2-3K steps with normalised lookups; this run isolates the table LR.
+_base_: base/proxy.yaml
+model_config: configs/models/ced_engram_55m.yaml
+optim:
+  engram_lr_mult: 1.0

@@ -1,0 +1,20 @@
+model:
+  arch: ced
+  vocab_size: 32768
+  d_model: 1024
+  n_layers: 22
+  n_encoder_layers: 11
+  n_heads: 16
+  n_kv_heads: 4
+  head_dim: 64
+  rope_dims: 32
+  ffn_dim: 2048
+  residual: mhc
+  gr_branches: 4
+  swa_window: 512
+  use_engram: true
+  engram_heads: 8
+  engram_head_dim: 32
+  engram_table: 50021
+  engram_orders: [2, 3]
+  max_position: 16384

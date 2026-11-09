@@ -1,0 +1,17 @@
+# Tokenizer training (report_saul.md 6). Variants for the proxy bits-per-byte ablation.
+data_config: configs/data.yaml
+out_root: artifacts/tokenizers
+default: legal32k
+min_frequency: 5
+sample_bytes: 3000000000   # PyYAML reads 3.0e9 as a string (exponent needs a sign)
+source_weights: {supreme_court: 0.35, acts: 0.15, tribunals: 0.25, high_courts: 0.25}
+variants:
+  legal32k: {vocab_size: 32768, regex: gpt2}
+  legal24k: {vocab_size: 24576, regex: gpt2}
+  legal49k: {vocab_size: 49152, regex: gpt2}
+  legal32k_cl100k: {vocab_size: 32768, regex: cl100k}   # ablation: shows the NER span-alignment hazard
+gates:
+  roundtrip_docs: 5000
+  span_alignment_threshold: 0.995
+  compression_docs_per_source: 500
+  rare_token_min_count: 50

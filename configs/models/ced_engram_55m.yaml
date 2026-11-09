@@ -1,0 +1,9 @@
+# Ablation: ced_55m plus a ~2.8M-parameter Engram (hashed 2/3-gram memory). Engram is additive memory, so this
+# run has ~2.8M more parameters than ced_55m at nearly the same FLOPs.
+_base_: ced_55m.yaml
+model:
+  use_engram: true
+  engram_heads: 4
+  engram_head_dim: 32
+  engram_table: 10007
+  engram_orders: [2, 3]

@@ -1,0 +1,11 @@
+# Full causal-encoder-decoder pretrain. 9,000 x 524,288 tokens = 4.72B, same WSD as Saul-Dense.
+# One run: stable mixture the whole way, decay in the last 20% of steps. MNTP stays off.
+_base_: base.yaml
+model_config: configs/models/ced_290m_train.yaml
+run_dir: runs/ced_290m/wsd
+train:
+  mntp: false
+  ckpt_every: 1000
+wandb:
+  enabled: true
+  project: saul-phase1

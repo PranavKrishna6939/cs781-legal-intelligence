@@ -1,0 +1,3 @@
+# Saul-CED proxy + Engram hashed n-gram memory (55.4M; Engram adds memory, not FLOPs).
+_base_: base/proxy.yaml
+model_config: configs/models/ced_engram_55m.yaml

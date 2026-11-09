@@ -1,0 +1,5 @@
+# Three-point mixture curve with the capped anneal (30% Supreme Court) and the test mix (~78%).
+_base_: data.yaml
+mixture:
+  anneal: {supreme_court: 0.55, acts: 0.15, tribunals: 0.18, high_courts: 0.12}
+  anneal_use_test_mix: false

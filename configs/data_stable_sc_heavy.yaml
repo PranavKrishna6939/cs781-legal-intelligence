@@ -1,0 +1,5 @@
+# Continuation B: memorization starts in the stable phase, not only in the anneal.
+# Multipliers on the natural token share (not absolute probabilities).
+_base_: data.yaml
+mixture:
+  stable: {supreme_court: 4.0, acts: 2.5, tribunals: 1.0, high_courts: 0.4}

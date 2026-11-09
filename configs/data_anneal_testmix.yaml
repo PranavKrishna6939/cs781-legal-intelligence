@@ -1,0 +1,5 @@
+# Anneal mixture used by dense v1: absolute shares replaced by the test-source classifier
+# (data/stats/test_source_mix.json, about 78% Supreme Court), then floored by anneal_min_share.
+_base_: data.yaml
+mixture:
+  anneal_use_test_mix: true

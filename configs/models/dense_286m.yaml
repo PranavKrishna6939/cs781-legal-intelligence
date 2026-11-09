@@ -1,0 +1,18 @@
+model:
+  arch: dense
+  vocab_size: 32768
+  d_model: 1024
+  n_layers: 20
+  n_heads: 16
+  n_kv_heads: 4
+  head_dim: 64
+  rope_dims: 32
+  rope_base: 10000
+  ffn_dim: 2560
+  ffn_type: swiglu
+  residual: gr
+  gr_branches: 4
+  gr_rank: 64
+  attn_impl: auto        # flex on CUDA (document block masks), sdpa on CPU; fa2 if flash-attn is built for sm_120
+  max_position: 16384
+  tie_word_embeddings: true

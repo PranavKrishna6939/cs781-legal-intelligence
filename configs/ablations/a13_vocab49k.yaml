@@ -1,0 +1,7 @@
+# a03 with the 49K tokenizer (compare bits/byte, not loss per token).
+_base_: base/proxy.yaml
+model_config: configs/models/dense_55m.yaml
+tokens: data/tokens/legal49k
+tokenizer: artifacts/tokenizers/legal49k
+model:
+  vocab_size: 49152

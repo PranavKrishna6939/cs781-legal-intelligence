@@ -1,0 +1,3 @@
+# Saul-CED proxy: causal encoder-decoder, 4-stream mHC, no Engram (52.6M).
+_base_: base/proxy.yaml
+model_config: configs/models/ced_55m.yaml

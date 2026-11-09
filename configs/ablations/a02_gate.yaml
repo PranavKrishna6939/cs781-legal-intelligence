@@ -1,0 +1,3 @@
+# + attention recipe: sigmoid output gate, QK-norm, 50% partial RoPE (still pre-norm; 52.5M).
+_base_: base/proxy.yaml
+model_config: configs/models/gate_55m.yaml

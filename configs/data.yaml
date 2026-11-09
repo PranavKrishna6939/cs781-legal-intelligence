@@ -1,0 +1,93 @@
+# Phase-1 data pipeline configuration (report_saul.md section 3).
+paths:
+  raw: data/raw
+  clean: data/clean
+  dedup: data/dedup
+  anon: data/anon
+  final: data/final
+  tokens: data/tokens
+  stats: data/stats
+  artifacts: artifacts
+
+hf:
+  repo: Exploration-Lab/CS-781-Capstone
+  token_path: ~/.cache/huggingface/token     # or env HF_TOKEN
+  phase1_files:
+    supreme_court: Phase_1_Pretraining/Train/train_supreme_court.json
+    high_courts: Phase_1_Pretraining/Train/train_high_courts.json
+    tribunals: Phase_1_Pretraining/Train/train_tribunals.json
+    acts: Phase_1_Pretraining/Train/train_acts.json
+  test_file: Phase_1_Pretraining/Test/test.json
+  # small downstream files used for tokenizer gates and anonymization-tag inspection
+  downstream_files:
+    - Phase_2_LNER/Train/fold1-text.json
+    - Phase_2_LNER/Train/fold1-gold.json
+    - Phase_2_LNER/Train/fold2-text.json
+    - Phase_2_LNER/Train/fold2-gold.json
+    - Phase_2_LNER/Train/labels.txt
+    - Phase_3_RR/Train/CL_train.json
+    - Phase_3_RR/Train/IT_train.json
+    - Phase_3_RR/Train/label_vocab.json
+    - Phase_4_CJPE/Train/dev.json
+    - Phase_5_LSI/Train/dev.json
+    - Phase_6_Summ/Test/test.json
+    - Phase_7_PCR/Dev/dev.json
+    - Phase_7_PCR/Dev/dev_candidates.json
+  expected_sizes:            # bytes, from the HF tree (download sanity check)
+    supreme_court: 1322567168
+    high_courts: 10672497795
+    tribunals: 6483962193
+    acts: 728801891
+
+sources: [supreme_court, tribunals, acts, high_courts]   # also the dedup priority order (first wins)
+
+clean:
+  min_words: 64
+  # auto: decide from the 1,000 test prompts (collapse all whitespace if prompts carry no newlines)
+  whitespace_mode: auto      # auto | collapse | keep_newlines | mixed
+  mixed_collapse_prob: 0.7   # only for whitespace_mode=mixed
+  workers: 16
+  batch_size: 2000
+  shard_records: 50000
+  hc_repeated_line_min_count: 3   # PDF page headers repeated >=3 times inside a document are dropped
+  hc_repeated_line_max_chars: 100
+
+dedup:
+  shingle_words: 5
+  num_perm: 128
+  bands: 16
+  rows: 8
+  threshold: 0.8
+  workers: 16
+  min_words_for_minhash: 20
+
+anonymize:
+  frac: 0.12                 # fraction of documents anonymized with <NAME>/<ORG> (deterministic by id hash)
+  statute_frac: 0.03         # additional fraction with statute references masked (only if a statute tag exists)
+  tags_file: artifacts/downstream_tags.json
+  default_tags: {name: "<NAME>", org: "<ORG>", statute: null}
+
+split:
+  val_tokens_per_source: 5000000
+  tokens_per_word: 1.35      # only used to translate token budgets into word budgets before tokenization
+  dev_docs:
+    supreme_court: 2000
+    tribunals: 170
+    high_courts: 170
+    acts: 160
+  dev_oversample: 1.6        # select more candidate docs than needed (some are too short)
+  dev_min_offset_words: 300
+  prompt_words: 512
+  cont_words: 128
+  fast_subset: {supreme_court: 400, other: 100}
+  seed: 781
+
+mixture:
+  # multipliers on the natural token share (report 3.4). Normalised at runtime.
+  stable: {supreme_court: 2.5, acts: 1.5, tribunals: 1.0, high_courts: 0.6}
+  # decay/anneal mixture: absolute shares; overwritten by data/stats/test_source_mix.json when use_test_mix=true
+  # Capped so the 944M-token decay adds ~1.2 passes over Supreme Court (237M train tokens) and ~0.8 over acts.
+  # The test-mix override (SC 78%) re-read SC 3.1x during the decay (8 passes in total) and held-out SC loss rose.
+  anneal: {supreme_court: 0.30, acts: 0.12, tribunals: 0.30, high_courts: 0.28}
+  anneal_use_test_mix: false
+  anneal_min_share: 0.08     # never drop a source completely during annealing

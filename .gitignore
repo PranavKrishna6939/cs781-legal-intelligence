@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+data/
+runs/
+artifacts/
+logs/
+submissions/
+*.pt
+*.safetensors
+*.bin

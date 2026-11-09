@@ -1,0 +1,16 @@
+"""Shared constants for Phase 5."""
+from __future__ import annotations
+
+N_LABELS = 100
+SEED = 781
+CHUNK = 2048
+MAX_CHUNKS = 8
+BOS_ID = 0
+PAD_ID = 2
+MEMBER_MARGIN = 0.06
+ADOPT_GAIN = 0.007
+DECISION_GAIN = 0.003
+STACK_GAIN = 0.005
+SUBSET = 15000
+BUCKETS = (512, 1024, 2048)
+KAPPAS = (0, 25, 50, 100, 200, None)
