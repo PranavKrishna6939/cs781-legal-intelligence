@@ -54,8 +54,7 @@ Python 3.11, PyTorch 2.x with CUDA. Most scripts assume the repository lives at 
 `SAUL_CKPT_ROOT`, `SAUL_TOKENIZER`, `SAUL_P2_DIR`, `SAUL_P3_DIR`, `SAUL_P4_DIR`, `SAUL_P5_DIR`,
 `SAUL_P6_DIR` and `SAUL_P6_DATA`. Competition data goes under `data/raw/Phase_N_*`.
 
-Hardware: pretraining and large runs used one NVIDIA RTX PRO 6000 Blackwell (96 GB; three of them
-until 5 October); a 24 GB A10G ran the PEFT runs in Phases 5 and 6. Phase 7 is CPU only.
+Hardware: pretraining and large runs used one NVIDIA RTX PRO 6000; 24 GB A10G was used to run the PEFT runs.
 
 <!-- phase1 -->
 ## Phase 1: legal language model pretraining
